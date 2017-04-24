@@ -65,7 +65,7 @@ class Ball {
 		ball.x += 1;
 		ball.draw(ctx);
 		angle += 0.05;
-		if (angle % 360 == 0) { //进行归零处理
+		if (angle > 6.28) { //进行归零处理
 			angle = 0;
 		};
 		if (ball.x <= config.width) {
