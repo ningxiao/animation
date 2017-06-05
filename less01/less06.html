@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>颜色二进制操作</title>
+    <meta name="author" content="leju" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+        
+        li {
+            margin: 20px;
+        }
+        
+        .panel {
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 0;
+        }
+        
+        #canvas {
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript" src="../js/Utils.js"></script>
+</head>
+
+<body style="display: inline">
+    <div class="panel">
+        <h3>一、三原色转二进制</h3>
+        <ol>
+            <li>
+                << --->按位左移操作符(在指定的位数将一个数值的二进制格式向左移动若干位 255的二进制格式11111111 向左位移16 结果 111111110000000000000000 后16位置不全为了0)
+            </li>
+            <li>
+                >> --->按位右移操作符(在指定的位数将一个数值的二进制格式向右移动若干位 111111110000000000000000 向右位移16 结果 11111111)
+            </li>
+            <li>
+                | --->按位或操作符(在二进制层面进行两个数字对比,一个值为1其结果1 如果两个全部为0则为0 101010 与110001 结果111011 )
+            </li>
+            <li>
+                & --->按位与操作符(在二进制层面进行两个数字对比,一个值为0其结果0 如果两个全部为1则为1 11111111101010101 与0000000011111111 结果0000000001010101 )
+            </li>
+            <li>
+                ^ --->按位异或操作符(在二进制层面进行两个数字对比,两个数值对应位上只有一个1时返回1，否则0 10101010 与11001001 结果 11101011 )
+            </li>
+            <li style="color: red;">
+                备注:二进制位对比会自动补全填充0
+            </li>
+        </ol>
+    </div>
+    <script type="text/javascript" src="./js/less06.js"></script>
+</body>
+</body>
+
+</html>
