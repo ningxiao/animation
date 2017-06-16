@@ -25,10 +25,10 @@
             for (var i = 0; i < brush_density; i++) {
                 var angle = Math.random() * Math.PI * 2; //随机产生一个弧度值0-2π
                 var radius = Math.random() * brush_size; //随机产生一个圆半径0-50
-                var xpos = (mouse.x + Math.cos(angle) * radius) | 0; //三角函数求出X坐标
+                var xpos = (mouse.x + Math.cos(angle) * radius) | 0; //三角函数求出X坐标 0取整
                 var ypos = (mouse.y + Math.sin(angle) * radius) | 0; //三角函数求出Y坐标
                 var offset = (xpos + ypos * imagedata.width) * 4; //获取像素起始坐标rgba 数组四位一个颜色
-                pixels[offset] = brush_color >> 16 & 0xff; //获取红色
+                pixels[offset] = brush_color >> 16 & 0xff; //获取红色 
                 pixels[offset + 1] = brush_color >> 8 & 0xff; //获取绿色
                 pixels[offset + 2] = brush_color & 0xff; //获取蓝色
                 pixels[offset + 3] = 255;
