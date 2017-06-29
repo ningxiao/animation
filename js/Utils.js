@@ -16,17 +16,16 @@ const Utils = {};
 Utils.IsTouch = "ontouchend" in document ? true : false;
 /**
  * 图片队列加载
- * @param  {[type]} srcs     [description]
- * @param  {[type]} imgs     [description]
- * @param  {[type]} complete [description]
+ * @param  {[type]} urls     [description]
+ * @param  {[type]} complete     [description]
  * @param  {[type]} progress [description]
  * @return {[type]}          [description]
  */
-Utils.QueueImg = (urls, complete, progress) => {
-    let key, url, index = arguments[3] || 0;
-    let data = urls[index];
-    let img = new Image();
-    let bitmap = arguments[4] || {};
+Utils.QueueImg = (urls, complete, progress, index, bitmap) => {
+    let key, url, data, img = new Image();
+    index = index || 0;
+    data = urls[index];
+    bitmap = bitmap || {};
     for (key in data) {
         url = data[key];
     };
