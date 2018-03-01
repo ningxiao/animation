@@ -25,7 +25,7 @@ class Arrow {
 		ctx.restore(); //返回之前保存过的路径状态和属性
 	};
 };
-(function(exports) {
+(function (exports) {
 	let clientrect = document.documentElement.getBoundingClientRect();
 	document.addEventListener('touchmove', (event) => {
 		event.preventDefault();
@@ -36,17 +36,42 @@ class Arrow {
 	};
 })(typeof exports === 'object' ? exports : window);
 
-(function() {
+(function () {
+	const radian = 30 / 180 * Math.PI;
 	let dx, dy, ctx, arui, mouse;
 	let canvas = document.getElementById('canvas');
-
+	function marking() {
+		ctx.save();
+		ctx.lineWidth = 1;
+		ctx.strokeStyle = '#ff0000'; //设置线条颜色
+		ctx.beginPath();
+		ctx.moveTo(0, config.height / 2);
+		ctx.lineTo(config.width, config.height / 2);
+		ctx.moveTo(config.width / 2, 0);
+		ctx.lineTo(config.width / 2, config.height);
+		ctx.stroke(); //绘制已定义的路径进行描边
+		ctx.restore(); //返回之前保存过的路径状态和属性
+	}
 	function drawframe() {
 		ctx.clearRect(0, 0, config.width, config.height);
 		dx = mouse.x - arui.x;
 		dy = mouse.y - arui.y;
 		//利用三角函数反正切计算出弧度值
 		arui.rotation = Math.atan2(dy, dx);
+		marking();
 		arui.draw(ctx);
+		ctx.save();
+		ctx.lineWidth = 1.5;
+		ctx.strokeStyle = '#ff0000'; //设置线条颜色
+		ctx.beginPath();
+		ctx.moveTo(arui.x, arui.y);
+		ctx.lineTo(mouse.x, mouse.y);
+		ctx.moveTo(mouse.x, mouse.y);
+		ctx.lineTo(mouse.x + 100 * Math.cos(arui.rotation - radian), mouse.y + 100 * Math.sin(arui.rotation - radian));
+		ctx.moveTo(mouse.x, mouse.y);
+		ctx.lineTo(mouse.x + 100 * Math.cos(arui.rotation + radian), mouse.y + 100 * Math.sin(arui.rotation + radian));
+		ctx.stroke(); //绘制已定义的路径进行描边
+		ctx.restore(); //返回之前保存过的路径状态和属性
 		window.requestAnimationFrame(drawframe);
 	};
 	if (canvas) {

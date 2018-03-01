@@ -64,7 +64,7 @@ Utils.GetContext = (canvas) => {
  */
 Utils.GetWebGlContext = (canvas, opt_debug, opt_onerror) => {
     let gl, config = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"];
-    let opt_onerror = opt_onerror || function(event) {
+    let opt_onerror = opt_onerror || function (event) {
         console.log(event.statusMessage);
     };
     canvas.addEventListener("webglcontextcreationerror", opt_onerror, false);
@@ -264,31 +264,12 @@ Utils.LocalToGobal = (cw, ch, rect, cx, cy) => {
  * @return {[type]}         [description]
  */
 Utils.CaptureMouse = (element) => {
-    let mouse = {
-            x: 0,
-            y: 0,
-            event: null
-        },
-        body_scrollLeft = document.body.scrollLeft,
-        element_scrollLeft = document.documentElement.scrollLeft,
-        body_scrollTop = document.body.scrollTop,
-        element_scrollTop = document.documentElement.scrollTop,
-        offsetLeft = element.offsetLeft,
-        offsetTop = element.offsetTop;
-    element.addEventListener('mousemove', function(event) {
-        let x, y;
-        if (event.pageX || event.pageY) {
-            x = event.pageX;
-            y = event.pageY;
-        } else {
-            x = event.clientX + body_scrollLeft + element_scrollLeft;
-            y = event.clientY + body_scrollTop + element_scrollTop;
-        };
-        x -= offsetLeft;
-        y -= offsetTop;
-        mouse.x = x;
-        mouse.y = y;
-        mouse.event = event;
+    let mouse = { x: 0, y: 0 };
+    let { left, top } = element.getBoundingClientRect();
+    element.addEventListener('mousemove', function (ev) {
+        let { pageX, pageY } = ev;
+        mouse.x = pageX - left;
+        mouse.y = pageY - top;
     }, false);
     return mouse;
 };
@@ -299,11 +280,11 @@ Utils.CaptureMouse = (element) => {
  */
 Utils.CaptureTouch = (element) => {
     let touch = {
-            x: null,
-            y: null,
-            isPressed: false,
-            event: null
-        },
+        x: null,
+        y: null,
+        isPressed: false,
+        event: null
+    },
         body_scrollLeft = document.body.scrollLeft,
         element_scrollLeft = document.documentElement.scrollLeft,
         body_scrollTop = document.body.scrollTop,
@@ -399,7 +380,7 @@ Utils.ContainsPoint = (rect, x, y) => {
  * 浏览器帧频对象 获取
  * @return {requestAnimationFrame}           requestAnimationFrame
  */
-window.requestAnimationFrame || (window.requestAnimationFrame = window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || function(callback) {
+window.requestAnimationFrame || (window.requestAnimationFrame = window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || function (callback) {
     setTimeout(callback, 1000 / 60);
 });
 
